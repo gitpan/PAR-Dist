@@ -1,4 +1,10 @@
 ____________________________________________________________________________
+[  7541] By: autrijus                              on 2003/08/14  15:58:33
+        Log: * This be 0.05.
+             * Patch from Germain Garand: run MY->fixin for script/*
+             so different #! paths in script/ won't hurt each other
+	   ! lib/PAR/Dist.pm
+____________________________________________________________________________
 [  7355] By: autrijus                              on 2003/08/06  08:32:56
         Log: * 0.04.
 	   ! lib/PAR/Dist.pm

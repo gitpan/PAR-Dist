@@ -1,11 +1,11 @@
 # $File: //member/autrijus/PAR-Dist/lib/PAR/Dist.pm $ $Author: autrijus $
-# $Revision: #6 $ $Change: 7355 $ $DateTime: 2003/08/06 08:32:56 $
+# $Revision: #7 $ $Change: 7541 $ $DateTime: 2003/08/14 15:58:33 $
 
 package PAR::Dist;
 require Exporter;
 use vars qw/$VERSION @ISA @EXPORT/;
 
-$VERSION    = '0.04';
+$VERSION    = '0.05';
 @ISA	    = 'Exporter';
 @EXPORT	    = qw/ blib_to_par install_par uninstall_par sign_par verify_par /;
 
@@ -18,7 +18,7 @@ PAR::Dist - Create and manipulate PAR distributions
 
 =head1 VERSION
 
-This document describes version 0.04 of PAR::Dist, released August 6, 2003.
+This document describes version 0.05 of PAR::Dist, released August 14, 2003.
 
 =head1 SYNOPSIS
 
@@ -262,6 +262,15 @@ sub _install_or_uninstall {
 	    $name = $1; last;
 	}
 	close META;
+    }
+
+    if (-d 'script') {
+	require ExtUtils::MY;
+	foreach my $file (glob("script/*")) {
+	    next unless -T $file;
+	    ExtUtils::MY->fixin($file);
+	    chmod(0555, $file);
+	}
     }
 
     $name =~ s{::|-}{/}g;
