@@ -3,7 +3,6 @@ inc/Module/Install.pm
 inc/Module/Install/Base.pm
 inc/Module/Install/Makefile.pm
 inc/Module/Install/Makefile/Name.pm
-inc/Module/Install/Makefile/Version.pm
 inc/Module/Install/MakeMaker.pm
 inc/Module/Install/Metadata.pm
 lib/PAR/Dist.pm

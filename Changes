@@ -1,4 +1,16 @@
 ____________________________________________________________________________
+[  7149] By: autrijus                              on 2003/07/27  07:57:11
+        Log: * This be 0.03.
+             * blib_to_par() was not correctly chdir'ing back to
+	       original cwd.
+             * blib_to_par($path) did not work; it was erroneously
+	       parsed as $dist.
+	   ! Makefile.PL lib/PAR/Dist.pm
+____________________________________________________________________________
+[  7045] By: autrijus                              on 2003/07/19  01:40:46
+        Log: * fix some doc errors
+	   ! lib/PAR/Dist.pm
+____________________________________________________________________________
 [  6987] By: autrijus                              on 2003/07/16  06:14:55
         Log: * This be PAR::Dist, 0.01.
 	   + MANIFEST Makefile.PL README t/0-signature.t

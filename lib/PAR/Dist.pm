@@ -1,11 +1,11 @@
 # $File: //member/autrijus/PAR-Dist/lib/PAR/Dist.pm $ $Author: autrijus $
-# $Revision: #2 $ $Change: 6987 $ $DateTime: 2003/07/16 06:14:55 $
+# $Revision: #4 $ $Change: 7149 $ $DateTime: 2003/07/27 07:57:11 $
 
 package PAR::Dist;
 require Exporter;
 use vars qw/$VERSION @ISA @EXPORT/;
 
-$VERSION    = '0.01';
+$VERSION    = '0.03';
 @ISA	    = 'Exporter';
 @EXPORT	    = qw/ blib_to_par install_par uninstall_par sign_par verify_par /;
 
@@ -32,13 +32,16 @@ In programs:
     sign_par($dist);		# sign it using Module::Signature
     verify_par($dist);		# verify it using Module::Signature
 
-    install_par("http://example.com/DBI-latest.par");   # this also works
+    install_par("http://foo.com/DBI-1.37-MSWin32-5.8.0.par"); # works too
 
 =head1 DESCRIPTION
 
 This module creates and manipulates I<PAR distributions>.  They are
 architecture-specific B<PAR> files, containing everything under F<blib/>
-of CPAN distributions after their C<make> or C<Build> stage.
+of CPAN distributions after their C<make> or C<Build> stage, a
+F<META.yml> describing metadata of the original CPAN distribution, 
+and a F<MANIFEST> detailing all files within it.  Digitally signed PAR
+distributions will also contain a F<SIGNATURE> file.
 
 The naming convention for such distributions is:
 
@@ -51,15 +54,16 @@ C<i386-freebsd>.
 =head1 FUNCTIONS
 
 Five functions are exported by default.  They can take either a hash of
-named arguments, a single C<$dist> argument, or no arguments (in which case
+named arguments, a single argument (taken as C<$path> by C<blib_to_par>
+and C<$dist> by other functions), or no arguments (in which case
 the first PAR file in the current directory is used).
 
 Therefore, under a directory containing only a single F<test.par>, all
 invocations below are equivalent:
 
-    % perl -MDist::PAR -e"install_par( dist => 'test.par' )"
-    % perl -MDist::PAR -e"install_par( 'test.par' )"
-    % perl -MDist::PAR -einstall_par;
+    % perl -MPAR::Dist -e"install_par( dist => 'test.par' )"
+    % perl -MPAR::Dist -e"install_par( 'test.par' )"
+    % perl -MPAR::Dist -einstall_par;
 
 If C<$dist> resembles a URL, C<LWP::Simple::mirror> is called to mirror it
 locally under C<$ENV{PAR_TEMP}> (or C<$TEMP/par/> if unspecified), and the
@@ -69,7 +73,7 @@ function will act on the fetched local file instead.
 
 Builds a PAR distribution from the F<blib/> subdirectory under C<$path>, or
 under the current directory if unspecified.  If F<blib/> does not exist,
-it automatically runs C<Build>, C<make>, C<Build.PL> or C<Makefile.PL> to
+it automatically runs F<Build>, F<make>, F<Build.PL> or F<Makefile.PL> to
 create it.
 
 Returns the filename or the generated PAR distribution.
@@ -77,11 +81,13 @@ Returns the filename or the generated PAR distribution.
 =cut
 
 sub blib_to_par {
-    my %args = &_args if @_;
+    @_ = (path => @_) if @_ == 1;
+
+    my %args = @_;
     require Config;
 
     my $path	= $args{path};
-    my $dist	= $args{dist};
+    my $dist	= File::Spec->rel2abs($args{dist}) if $args{dist};
     my $name	= $args{name};
     my $version	= $args{version};
     my $suffix	= $args{suffix} || "$Config::Config{archname}-$Config::Config{version}.par";
@@ -167,6 +173,8 @@ YAML
 
     unlink "blib/MANIFEST";
     unlink "blib/META.yml";
+
+    $dist ||= File::Spec->catfile($cwd, $file) if $cwd;
 
     if ($dist and $file ne $dist) {
         rename( $file => $dist );
@@ -356,6 +364,8 @@ sub _verify_or_sign {
     die "Module::Signature version 0.25 required"
 	unless Module::Signature->VERSION >= 0.25;
 
+    require Cwd;
+    my $cwd = Cwd::cwd();
     my $action = $args{action};
     my ($dist, $tmpdir) = _unzip_to_tmpdir($args{dist});
     $action ||= (-e 'SIGNATURE' ? 'verify' : 'sign');
@@ -380,6 +390,8 @@ sub _verify_or_sign {
     my $rv = Module::Signature->can($action)->(%args);
     _zip(dist => $dist) if $action eq 'sign';
     File::Path::rmtree([$tmpdir]);
+
+    chdir($cwd);
     return $rv;
 }
 
