@@ -1,0 +1,11 @@
+____________________________________________________________________________
+[  6987] By: autrijus                              on 2003/07/16  06:14:55
+        Log: * This be PAR::Dist, 0.01.
+	   + MANIFEST Makefile.PL README t/0-signature.t
+	   + t/1-basic.t
+	   ! lib/PAR/Dist.pm
+____________________________________________________________________________
+[  6986] By: autrijus                              on 2003/07/16  03:26:03
+        Log: * Initial check in of PAR-Dist, a module that manipulates
+             PAR distributions.
+	   + lib/PAR/Dist.pm
