@@ -1,11 +1,11 @@
 # $File: //member/autrijus/PAR-Dist/lib/PAR/Dist.pm $ $Author: autrijus $
-# $Revision: #10 $ $Change: 9243 $ $DateTime: 2003/12/09 00:02:25 $
+# $Revision: #11 $ $Change: 9530 $ $DateTime: 2004/01/01 05:24:09 $
 
 package PAR::Dist;
 require Exporter;
 use vars qw/$VERSION @ISA @EXPORT/;
 
-$VERSION    = '0.06';
+$VERSION    = '0.07';
 @ISA	    = 'Exporter';
 @EXPORT	    = qw/ blib_to_par install_par uninstall_par sign_par verify_par /;
 
@@ -18,7 +18,7 @@ PAR::Dist - Create and manipulate PAR distributions
 
 =head1 VERSION
 
-This document describes version 0.06 of PAR::Dist, released December 9, 2003.
+This document describes version 0.07 of PAR::Dist, released January 1, 2004.
 
 =head1 SYNOPSIS
 
@@ -463,7 +463,7 @@ Please send bug reports to E<lt>bug-par@rt.cpan.orgE<gt>.
 
 =head1 COPYRIGHT
 
-Copyright 2003 by Autrijus Tang E<lt>autrijus@autrijus.orgE<gt>.
+Copyright 2003, 2004 by Autrijus Tang E<lt>autrijus@autrijus.orgE<gt>.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

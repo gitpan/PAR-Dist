@@ -1,6 +1,6 @@
-#line 1 "inc/Module/Install/Makefile.pm - /usr/local/lib/perl5/site_perl/5.8.1/Module/Install/Makefile.pm"
+#line 1 "inc/Module/Install/Makefile.pm - /usr/local/lib/perl5/site_perl/5.8.2/Module/Install/Makefile.pm"
 # $File: //depot/cpan/Module-Install/lib/Module/Install/Makefile.pm $ $Author: autrijus $
-# $Revision: #49 $ $Change: 1782 $ $DateTime: 2003/10/27 19:48:59 $ vim: expandtab shiftwidth=4
+# $Revision: #53 $ $Change: 1847 $ $DateTime: 2003/12/31 23:14:54 $ vim: expandtab shiftwidth=4
 
 package Module::Install::Makefile;
 use Module::Install::Base; @ISA = qw(Module::Install::Base);
@@ -28,7 +28,11 @@ sub makemaker_args {
 
 sub clean_files {
     my $self = shift;
-    $self->makemaker_args( clean => { FILES => "@_ " } );
+    my $clean = $self->makemaker_args->{clean} ||= {};
+    %$clean = (
+        %$clean, 
+        FILES => join(" ", grep length, $clean->{FILES}, @_),
+    );
 }
 
 sub libs {
@@ -72,8 +76,16 @@ sub write {
 
     # merge both kinds of requires into prereq_pm
     my $dir = ($args->{DIR} ||= []);
-    push @$dir, map "$self->{prefix}/$self->{bundle}/$_->[1]", @{$self->bundles}
-        if $self->bundles;
+    if ($self->bundles) {
+        push @$dir, map "$_->[1]", @{$self->bundles};
+        delete $prereq->{$_->[0]} for @{$self->bundles};
+    }
+
+    if (my $perl_version = $self->perl_version) {
+        eval "use $perl_version; 1"
+            or die "ERROR: perl: Version $] is installed, ".
+                   "but we need version >= $perl_version";
+    }
 
     my %args = map {($_ => $args->{$_})} grep {defined($args->{$_})} keys %$args;
 
@@ -131,4 +143,4 @@ sub postamble {
 
 __END__
 
-#line 263
+#line 276

@@ -1,4 +1,17 @@
 ____________________________________________________________________________
+[  9539] By: autrijus                              on 2004/01/01  10:23:13
+        Log: * This be 0.07.
+             * Do not use an identical README as PAR's. ;-)
+	   ! README
+____________________________________________________________________________
+[  9530] By: autrijus                              on 2004/01/01  05:24:09
+        Log: * bump version and switch to &WriteAll in Makefile.PL.
+	   ! MANIFEST Makefile.PL lib/PAR/Dist.pm
+____________________________________________________________________________
+[  9245] By: autrijus                              on 2003/12/09  00:06:37
+        Log: * manifest.
+	   ! MANIFEST
+____________________________________________________________________________
 [  9244] By: autrijus                              on 2003/12/09  00:04:28
         Log: * switch to M::I-style Makefile.PL
 	   ! MANIFEST Makefile.PL
