@@ -1,11 +1,11 @@
 # $File: //member/autrijus/PAR-Dist/lib/PAR/Dist.pm $ $Author: autrijus $
-# $Revision: #4 $ $Change: 7149 $ $DateTime: 2003/07/27 07:57:11 $
+# $Revision: #6 $ $Change: 7355 $ $DateTime: 2003/08/06 08:32:56 $
 
 package PAR::Dist;
 require Exporter;
 use vars qw/$VERSION @ISA @EXPORT/;
 
-$VERSION    = '0.03';
+$VERSION    = '0.04';
 @ISA	    = 'Exporter';
 @EXPORT	    = qw/ blib_to_par install_par uninstall_par sign_par verify_par /;
 
@@ -15,6 +15,10 @@ use File::Spec;
 =head1 NAME
 
 PAR::Dist - Create and manipulate PAR distributions
+
+=head1 VERSION
+
+This document describes version 0.04 of PAR::Dist, released August 6, 2003.
 
 =head1 SYNOPSIS
 
@@ -33,6 +37,8 @@ In programs:
     verify_par($dist);		# verify it using Module::Signature
 
     install_par("http://foo.com/DBI-1.37-MSWin32-5.8.0.par"); # works too
+    install_par("http://foo.com/DBI-1.37"); # auto-appends archname + perlver
+    install_par("cpan://AUTRIJUS/PAR-0.73"); # uses CPAN author directory
 
 =head1 DESCRIPTION
 
@@ -45,7 +51,7 @@ distributions will also contain a F<SIGNATURE> file.
 
 The naming convention for such distributions is:
 
-    NAME-VERSION-ARCH-PERL_VERSION.par
+    $NAME-$VERSION-$ARCH-$PERL_VERSION.par
 
 For example, C<PAR-Dist-0.01-i386-freebsd-5.8.0.par> corresponds to the
 0.01 release of C<PAR-Dist> on CPAN, built for perl 5.8.0 running on
@@ -67,7 +73,13 @@ invocations below are equivalent:
 
 If C<$dist> resembles a URL, C<LWP::Simple::mirror> is called to mirror it
 locally under C<$ENV{PAR_TEMP}> (or C<$TEMP/par/> if unspecified), and the
-function will act on the fetched local file instead.
+function will act on the fetched local file instead.  If the URL begins
+with C<cpan://AUTHOR/>, it will be expanded automatically to the author's CPAN
+directory (e.g. C<http://www.cpan.org/modules/by-authors/id/A/AU/AUTHOR/>).
+
+If C<$dist> does not have a file extension beginning with a letter or
+underscore, a dash and C<$suffix> ($ARCH-$PERL_VERSION.par by default)
+will be appended to it.
 
 =head2 blib_to_par
 
@@ -333,6 +345,12 @@ sub _args {
     unshift @_, (glob('*.par'))[0] unless @_;
     @_ = (dist => @_) if @_ == 1;
     my %args = @_;
+
+    $args{dist} .= '-' . do {
+	require Config;
+	$args{suffix} || "$Config::Config{archname}-$Config::Config{version}.par"
+    } unless !$args{dist} or $args{dist} =~ /\.[a-zA-Z_][^.]*$/;
+
     $args{dist} = _fetch(dist => $args{dist})
 	if ($args{dist} and $args{dist} =~ m!^\w+://!);
     return %args;
@@ -347,10 +365,17 @@ sub _fetch {
     mkdir $ENV{PAR_TEMP}, 0777;
     %escapes = map { chr($_) => sprintf("%%%02X", $_) } 0..255 unless %escapes;
 
+    $args{dist} =~ s{^cpan://((([a-zA-Z])[a-zA-Z])[-_a-zA-Z]+)/}
+		    {http://www.cpan.org/modules/by-authors/id/\U$3/$2/$1\E/};
+
     my $file = $args{dist};
     $file =~ s/([^\w\.])/$escapes{$1}/g;
     $file = File::Spec->catfile( $ENV{PAR_TEMP}, $file);
-    LWP::Simple::mirror( $args{dist}, $file );
+    my $rc = LWP::Simple::mirror( $args{dist}, $file );
+
+    if (!LWP::Simple::is_success($rc)) {
+	die "Error $rc: ", LWP::Simple::status_message($rc), " ($args{dist})\n";
+    }
 
     return $file if -e $file;
     return;

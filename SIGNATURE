@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.26.
+signed via the Module::Signature module, version 0.28.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -14,24 +14,24 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 646de126e56941ed9220862024d6b4c7bc5276e9 Changes
+SHA1 5feef511de18fcd527e5c71d8b6055b18e5270c3 Changes
 SHA1 b6c12a2e6acc5ce28981e056398adf278746c9cb MANIFEST
-SHA1 a1a10d6402a5978957315f7d8a60ab7ad8b00709 META.yml
+SHA1 e02c73146fe46f6decd0ec1166633160022ed3cb META.yml
 SHA1 ef3693fe60c79fa89adc3a3a1e1c2ca54e166fd1 Makefile.PL
 SHA1 67a18a2f38c55a022f7a1147ca5bf0b0cb3284dd README
-SHA1 df03e6f585a853fa97d3efaf05bd9b73067fe999 inc/Module/Install.pm
-SHA1 b5b01018d114fddb86370deaabed8b671d89ae9c inc/Module/Install/Base.pm
-SHA1 f4c32ae24cf36c133f06c45d4bfd035413e13fa0 inc/Module/Install/MakeMaker.pm
-SHA1 56eaf590c576729dd197a33dc131b1bbc624a8d5 inc/Module/Install/Makefile.pm
-SHA1 1b7801f14ae28e70727e6221b678ef235ceb1be4 inc/Module/Install/Makefile/Name.pm
-SHA1 4a2d4d3d14874e4d43c0d634805a4978b3d83e13 inc/Module/Install/Metadata.pm
-SHA1 380da26b5b3f237b0df9c2f85dae18ff2a1ebd4e lib/PAR/Dist.pm
+SHA1 fd5093c4d1bf31795995d24c2ed018319ac1ec07 inc/Module/Install.pm
+SHA1 276ae59951d39d692be2a7a943a54c45f6822f16 inc/Module/Install/Base.pm
+SHA1 cb63ee2fceecea6f93cc25bfb5cc122ca6870ed8 inc/Module/Install/MakeMaker.pm
+SHA1 f042d91d7f691e36c8bcb0b495dfc0b9f92576c3 inc/Module/Install/Makefile.pm
+SHA1 d127966c2c63021a85d4b28ae4311990f6427b7f inc/Module/Install/Makefile/Name.pm
+SHA1 f085c0e9e00b65499775acd2d09721e760d41897 inc/Module/Install/Metadata.pm
+SHA1 efe571c31c74d932a4ffe18ef244c3685f86aa77 lib/PAR/Dist.pm
 SHA1 0012d166b4c3bbfd102a21d54e19098238094514 t/0-signature.t
 SHA1 b01d036a15ebcb6e5f1f0af32608f2fd541c8e0e t/1-basic.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.2.2 (FreeBSD)
 
-iD8DBQE/I4detLPdNzw1AaARAtDWAJ44BKvOuAlQyoQY17axzDsIvsWsRwCfTEAM
-yPAHlsTxrwYAAQsgkJmnMT0=
-=l2pT
+iD8DBQE/ML2ZtLPdNzw1AaARAkEeAKCvXcy4+7SDrpfeof87wLk9zmVW7wCfe8JW
+Mkubnzu9ZumeJKJvl6jIhu8=
+=/iXG
 -----END PGP SIGNATURE-----
