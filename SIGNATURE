@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.33.
+signed via the Module::Signature module, version 0.37.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -14,24 +14,22 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 4d14a3e52f6ae739e9f1582994caa1c274c61fa0 Changes
-SHA1 b6c12a2e6acc5ce28981e056398adf278746c9cb MANIFEST
-SHA1 3a7a6ee8f8c6e14af5d1bd10594711be1aaf6fd1 META.yml
-SHA1 ef3693fe60c79fa89adc3a3a1e1c2ca54e166fd1 Makefile.PL
+SHA1 c9558595fc54bbe86e7b1aa3a2e00739c8e34503 Changes
+SHA1 320425e711190ab06641c3d78b7c4109c4685f24 MANIFEST
+SHA1 4c9782f0ef5f0cba761df307ea1e799f2a7fc666 META.yml
+SHA1 426fe99ada7083892034e0a183e7adc0ac6a09a2 Makefile.PL
 SHA1 67a18a2f38c55a022f7a1147ca5bf0b0cb3284dd README
-SHA1 fd5093c4d1bf31795995d24c2ed018319ac1ec07 inc/Module/Install.pm
-SHA1 276ae59951d39d692be2a7a943a54c45f6822f16 inc/Module/Install/Base.pm
-SHA1 cb63ee2fceecea6f93cc25bfb5cc122ca6870ed8 inc/Module/Install/MakeMaker.pm
-SHA1 f042d91d7f691e36c8bcb0b495dfc0b9f92576c3 inc/Module/Install/Makefile.pm
-SHA1 d127966c2c63021a85d4b28ae4311990f6427b7f inc/Module/Install/Makefile/Name.pm
-SHA1 f085c0e9e00b65499775acd2d09721e760d41897 inc/Module/Install/Metadata.pm
-SHA1 628cddd737da59e6f8a97d5cfc2b8eee809f46eb lib/PAR/Dist.pm
+SHA1 8b4877cb0aae407fcb37a4ac31f2f943bfbe2fe4 inc/Module/Install.pm
+SHA1 019bccc5b2e364447c6e6e150d049ca2a216598e inc/Module/Install/Base.pm
+SHA1 8508e76cf6417588c0118ec85f7d56be15383c00 inc/Module/Install/Makefile.pm
+SHA1 ef550fd641db011c741402b799ace0a446f8d8ec inc/Module/Install/Metadata.pm
+SHA1 729109023a35e22540ca70d055d516d396f78a8a lib/PAR/Dist.pm
 SHA1 0012d166b4c3bbfd102a21d54e19098238094514 t/0-signature.t
 SHA1 b01d036a15ebcb6e5f1f0af32608f2fd541c8e0e t/1-basic.t
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.2.2 (FreeBSD)
+Version: GnuPG v1.2.3 (FreeBSD)
 
-iD8DBQE/O7NotLPdNzw1AaARAuA9AJ0YQ8a1bHU6OomHZOOS+NCKvfz3EACfdNGg
-IywfQhBK56Xh+3ojGxcJ+Yw=
-=SWuB
+iD8DBQE/1RH5tLPdNzw1AaARApxiAJ44azANQ7w4Rg9iuxek5w/wIp2tvQCfUJJp
+SBqd7d1Kx5jtnJcJhUD4swc=
+=9Lgz
 -----END PGP SIGNATURE-----

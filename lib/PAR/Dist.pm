@@ -1,11 +1,11 @@
 # $File: //member/autrijus/PAR-Dist/lib/PAR/Dist.pm $ $Author: autrijus $
-# $Revision: #7 $ $Change: 7541 $ $DateTime: 2003/08/14 15:58:33 $
+# $Revision: #10 $ $Change: 9243 $ $DateTime: 2003/12/09 00:02:25 $
 
 package PAR::Dist;
 require Exporter;
 use vars qw/$VERSION @ISA @EXPORT/;
 
-$VERSION    = '0.05';
+$VERSION    = '0.06';
 @ISA	    = 'Exporter';
 @EXPORT	    = qw/ blib_to_par install_par uninstall_par sign_par verify_par /;
 
@@ -18,7 +18,7 @@ PAR::Dist - Create and manipulate PAR distributions
 
 =head1 VERSION
 
-This document describes version 0.05 of PAR::Dist, released August 14, 2003.
+This document describes version 0.06 of PAR::Dist, released December 9, 2003.
 
 =head1 SYNOPSIS
 
@@ -165,7 +165,7 @@ sub blib_to_par {
     my $file = "$name-$version-$suffix";
     unlink $file if -f $file;
 
-    print META << "YAML";
+    print META << "YAML" if fileno(META);
 name: $name
 version: $version
 build_requires: {}
@@ -355,6 +355,7 @@ sub _args {
     @_ = (dist => @_) if @_ == 1;
     my %args = @_;
 
+    $args{name} ||= $args{dist};
     $args{dist} .= '-' . do {
 	require Config;
 	$args{suffix} || "$Config::Config{archname}-$Config::Config{version}.par"

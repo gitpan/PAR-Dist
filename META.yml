@@ -1,10 +1,13 @@
 name: PAR-Dist
-module_name: PAR::Dist
-version: 0.05
+version: 0.06
 abstract: Create and manipulate PAR distributions
 author: Autrijus Tang (autrijus@autrijus.org)
+license: unknown
 distribution_type: module
+no_index:
+  directory:
+    - inc
 private:
   directory:
     - inc
-generated_by: Module::Install version 0.22
+generated_by: Module::Install version 0.27

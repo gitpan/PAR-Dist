@@ -1,4 +1,26 @@
 ____________________________________________________________________________
+[  9244] By: autrijus                              on 2003/12/09  00:04:28
+        Log: * switch to M::I-style Makefile.PL
+	   ! MANIFEST Makefile.PL
+____________________________________________________________________________
+[  9243] By: autrijus                              on 2003/12/09  00:02:25
+        Log: * This be 0.06.
+	   ! lib/PAR/Dist.pm
+____________________________________________________________________________
+[  9242] By: autrijus                              on 2003/12/09  00:01:32
+        Log: * patch from Ryan Briones to fix the case where
+             $args{name} is undefined.
+	   ! lib/PAR/Dist.pm
+____________________________________________________________________________
+[  8456] By: autrijus                              on 2003/10/17  11:01:55
+        Log: * add signature to makefile.pl
+	   ! Makefile.PL
+____________________________________________________________________________
+[  8350] By: autrijus                              on 2003/10/06  17:22:45
+        Log: * ekolve points out we are printing to a closed
+             filehandle META accidentally.
+	   ! lib/PAR/Dist.pm
+____________________________________________________________________________
 [  7541] By: autrijus                              on 2003/08/14  15:58:33
         Log: * This be 0.05.
              * Patch from Germain Garand: run MY->fixin for script/*
