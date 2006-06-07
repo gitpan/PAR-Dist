@@ -14,11 +14,16 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 c08364336e904b009613da8a08ecfab3eb94e8ad Changes
-SHA1 22f32da07ffd4b436f311e898e98cd3098b35148 MANIFEST
+SHA1 814ea13990fc394b02319f95645ce8bc9583599a Changes
+SHA1 02b63a0fb01d021f098643a131889434f227b2e8 MANIFEST
 SHA1 87a1f3d1d56e0be0bf23eb103dbc168b5f6c7352 META.yml
 SHA1 acf6e8071ba8447dca4e99e6febdffe2f66a3e82 Makefile.PL
-SHA1 1d123bdab4c0de80a32a54b82ac551244a5a252e README
+SHA1 ebcb4aaf5422e6ae92bd1570e48067e77ed45837 README
+SHA1 6a72d006521e50f77bfcef7ef776beca61294f1f debian/changelog
+SHA1 9c6b057a2b9d96a4067a749ee3b3b0158d390cf1 debian/compat
+SHA1 ab5334684dc22edc6738f05d4aeee0df8677c09d debian/control
+SHA1 971c6505cd7cfea7723f5992763a49c5d9def25a debian/copyright
+SHA1 ca908df4c7476b3124f1daf60a1bc5fc8738762d debian/rules
 SHA1 e28cf2d3ba35f6ca3a448acc7bee191b7c390379 inc/Module/Install.pm
 SHA1 e7c1c86f57b6778f4bdc7fd8c1b950e60ef41bc0 inc/Module/Install/Base.pm
 SHA1 e1829448769445cdaac384a888bf9ccf42e0d89a inc/Module/Install/Can.pm
@@ -27,13 +32,13 @@ SHA1 8ac832baf4f9e8e72d3e8f103cee6e8a94ac80e1 inc/Module/Install/Makefile.pm
 SHA1 0807e79d6dbfda4fcd3db0fc7df2e33e0cba263b inc/Module/Install/Metadata.pm
 SHA1 4da0a1fce2339cc3f8c296c7716480d2564d9470 inc/Module/Install/Win32.pm
 SHA1 9a903a1d178954ad864c7dcc98f9fa5c005d1553 inc/Module/Install/WriteAll.pm
-SHA1 c9831a5d9783e7b7f1634055c31564ff6101a2b3 lib/PAR/Dist.pm
+SHA1 9a657bd93af094416ad7e2969d3e1d68629fa4b2 lib/PAR/Dist.pm
 SHA1 9418e5f4027874c23064f0120c0dafd96497252f t/0-signature.t
 SHA1 b01d036a15ebcb6e5f1f0af32608f2fd541c8e0e t/1-basic.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.0 (GNU/Linux)
 
-iD8DBQFEbxOoZCuimE51gxcRAgmDAJwKRIiupzIvj//0WyyXKX0Rs/o/yACfQgHy
-YONaoiUYUE0nykVkkE2TscQ=
-=iCsr
+iD8DBQFEhv+iZCuimE51gxcRAk9zAJ9zV2cwizXfn9hg9Vfpw8A7hHrGhQCguvjm
+vr9abP1pej4rGPlBVXNUWjA=
+=zzd4
 -----END PGP SIGNATURE-----

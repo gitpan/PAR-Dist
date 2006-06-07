@@ -1,11 +1,8 @@
-# $File: //member/autrijus/PAR-Dist/lib/PAR/Dist.pm $ $Author: autrijus $
-# $Revision: #11 $ $Change: 9530 $ $DateTime: 2004/01/01 05:24:09 $
-
 package PAR::Dist;
 require Exporter;
 use vars qw/$VERSION @ISA @EXPORT/;
 
-$VERSION    = '0.09';
+$VERSION    = '0.10';
 @ISA	    = 'Exporter';
 @EXPORT	    = qw/ blib_to_par install_par uninstall_par sign_par verify_par /;
 
@@ -18,7 +15,7 @@ PAR::Dist - Create and manipulate PAR distributions
 
 =head1 VERSION
 
-This document describes version 0.08 of PAR::Dist, released February 13, 2006.
+This document describes version 0.10 of PAR::Dist, released Jun 07, 2006.
 
 =head1 SYNOPSIS
 
@@ -383,6 +380,12 @@ sub _args {
     my %args = @_;
 
     $args{name} ||= $args{dist};
+    # If we are installing from an URL, we want to munge the
+    # distribution name so that it is in form "Module-Name"
+    if ($args{name} and $args{name} =~ m!^\w+://!) {
+        $args{name} =~ s/^.*\/([^\/]+)$/$1/;
+        $args{name} =~ s/^([0-9A-Za-z_-]+)-\d+\..+$/$1/;
+    }
     $args{dist} .= '-' . do {
 	require Config;
 	$args{suffix} || "$Config::Config{archname}-$Config::Config{version}.par"
@@ -480,7 +483,7 @@ L<PAR>, L<ExtUtils::Install>, L<Module::Signature>, L<LWP::Simple>
 
 =head1 AUTHORS
 
-Autrijus Tang E<lt>autrijus@autrijus.orgE<gt>
+Audrey Tang E<lt>cpan@audreyt.orgE<gt>
 
 PAR has a mailing list, E<lt>par@perl.orgE<gt>, that you can write to;
 send an empty mail to E<lt>par-subscribe@perl.orgE<gt> to join the list
