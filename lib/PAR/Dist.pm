@@ -2,7 +2,7 @@ package PAR::Dist;
 require Exporter;
 use vars qw/$VERSION @ISA @EXPORT/;
 
-$VERSION    = '0.11';
+$VERSION    = '0.12';
 @ISA	    = 'Exporter';
 @EXPORT	    = qw/
   blib_to_par
@@ -410,7 +410,8 @@ sub merge_par {
     # extract additional pars and merge    
     foreach my $par (@additional_pars) {
         (undef, my $add_dir) = _unzip_to_tmpdir(
-            dist => File::Spec->catfile($old_cwd, $par)
+			#dist => File::Spec->catfile($old_cwd, $par)
+            dist => $par
         );
         my @files;
         my @dirs;
@@ -435,8 +436,8 @@ sub merge_par {
             my $target = File::Spec->catdir( $blibdir, @d );
             mkdir($target);
         }
+
         # merge files
-        
         foreach my $file (@files) {
             my ($v, $d, $f) = File::Spec->splitpath( $file );
             my @d = File::Spec->splitdir( $d );
@@ -458,10 +459,10 @@ sub merge_par {
     unlink File::Spec->catfile($blibdir, 'META.yml');
     
     chdir($base_dir);
-    my $resulting_par_file = blib_to_par();
-    File::Copy::move($resulting_par_file, File::Spec->catfile($old_cwd, $base_par));
-    
+    my $resulting_par_file = Cwd::abs_path(blib_to_par());
     chdir($old_cwd);
+    File::Copy::move($resulting_par_file, $base_par);
+    
     File::Path::rmtree([$base_dir]);
 }
 
@@ -518,10 +519,10 @@ sub remove_man {
     File::Path::rmtree(\@dirs);
     
     chdir($base_dir);
-    my $resulting_par_file = blib_to_par();
-    File::Copy::move($resulting_par_file, File::Spec->catfile($old_cwd, $par));
-    
+    my $resulting_par_file = Cwd::abs_path(blib_to_par());
     chdir($old_cwd);
+    File::Copy::move($resulting_par_file, $par);
+    
     File::Path::rmtree([$base_dir]);
 }
 

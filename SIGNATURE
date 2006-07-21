@@ -14,7 +14,7 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 39d4bed961c7257f43d7710383dc748fbcef42d1 Changes
+SHA1 a2f9eaf361baf34221738af3c856a666d16cd7b0 Changes
 SHA1 02b63a0fb01d021f098643a131889434f227b2e8 MANIFEST
 SHA1 87a1f3d1d56e0be0bf23eb103dbc168b5f6c7352 META.yml
 SHA1 40ca03314151a4b51e870b6798af27698fbcac5f Makefile.PL
@@ -32,13 +32,13 @@ SHA1 8ac832baf4f9e8e72d3e8f103cee6e8a94ac80e1 inc/Module/Install/Makefile.pm
 SHA1 0807e79d6dbfda4fcd3db0fc7df2e33e0cba263b inc/Module/Install/Metadata.pm
 SHA1 4da0a1fce2339cc3f8c296c7716480d2564d9470 inc/Module/Install/Win32.pm
 SHA1 9a903a1d178954ad864c7dcc98f9fa5c005d1553 inc/Module/Install/WriteAll.pm
-SHA1 598106a6b8c7912f26564f982553700f27a2cdcd lib/PAR/Dist.pm
+SHA1 e872bbe62b358ec24bcf34affed099e0d6c2b7d2 lib/PAR/Dist.pm
 SHA1 9418e5f4027874c23064f0120c0dafd96497252f t/0-signature.t
 SHA1 b01d036a15ebcb6e5f1f0af32608f2fd541c8e0e t/1-basic.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.2.2 (GNU/Linux)
 
-iD8DBQFEwNX+ZCuimE51gxcRAh3NAJ4vRjnaomfyXvTmd69MIxxp3VOnAACgipwe
-Sm1gzpIrAHakn3QTYNuVxoQ=
-=c+JR
+iD8DBQFEwOs3ZCuimE51gxcRAomJAKCDrvoqkC0HbtHgZyA6gD8w09Y/JACeP/9W
+/DaYuc2IlXrwSmFFQfVml60=
+=RQHZ
 -----END PGP SIGNATURE-----

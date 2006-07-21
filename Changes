@@ -2,6 +2,11 @@
 ____________________________________________________________________________
 By: smueller on 2006/07/21
 Log:
+    * Found a couple of path-related bugs in the new functions of 0.11.
+    * This be 0.12. Sorry!
+____________________________________________________________________________
+By: smueller on 2006/07/21
+Log:
     * Fixed potential bugs where slashes were used as path separators.
       Now using File::Spec everywhere (I think).
     * Added merge_par() which merges two or more .par archives.
