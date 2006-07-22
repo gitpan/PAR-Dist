@@ -1,5 +1,11 @@
 
 ____________________________________________________________________________
+By: smueller on 2006/07/22
+Log:
+    * Module::Install didn't regenerate META.yml because author bit
+      wasn't set.
+    * This is 0.13. (Sorry again, need to do this to make CPAN.pm happy.)
+____________________________________________________________________________
 By: smueller on 2006/07/21
 Log:
     * Found a couple of path-related bugs in the new functions of 0.11.
