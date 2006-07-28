@@ -1,3 +1,18 @@
+
+By: smueller on 2006/07/28
+Log:
+    * PAR::Dist would previously generate bad file names and META.yml if
+      the newlines contained Windows' \r. That's history.
+    * This is 0.15.
+____________________________________________________________________________
+By: smueller on 2006/07/25
+Log:
+    * Changed the calling conventions of remove_man to better resemble
+      those of the other functions. (This is backwards compatible.)
+    * Added get_meta() function.
+    * Slight documentation fixes.
+    * Version bump to 0.15.
+____________________________________________________________________________
 By: audreyt on 2006/07/19
 Log:
     * The "version" field of META.yml files written by Module::Build
