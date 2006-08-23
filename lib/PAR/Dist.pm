@@ -2,7 +2,7 @@ package PAR::Dist;
 require Exporter;
 use vars qw/$VERSION @ISA @EXPORT/;
 
-$VERSION    = '0.16';
+$VERSION    = '0.17';
 @ISA	    = 'Exporter';
 @EXPORT	    = qw/
   blib_to_par
@@ -451,6 +451,9 @@ sub merge_par {
 
     # extract additional pars and merge    
     foreach my $par (@additional_pars) {
+        # restore original directory because the par path
+        # might have been relative!
+        chdir($old_cwd);
         (undef, my $add_dir) = _unzip_to_tmpdir(
             dist => $par
         );
