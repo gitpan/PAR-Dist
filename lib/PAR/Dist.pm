@@ -2,7 +2,7 @@ package PAR::Dist;
 require Exporter;
 use vars qw/$VERSION @ISA @EXPORT @EXPORT_OK/;
 
-$VERSION    = '0.19';
+$VERSION    = '0.20';
 @ISA	    = 'Exporter';
 @EXPORT	    = qw/
   blib_to_par
@@ -21,7 +21,7 @@ $VERSION    = '0.19';
 /;
 
 use strict;
-use Carp qw/croak/;
+use Carp qw/carp croak/;
 use File::Spec;
 
 =head1 NAME
@@ -30,7 +30,7 @@ PAR::Dist - Create and manipulate PAR distributions
 
 =head1 VERSION
 
-This document describes version 0.18 of PAR::Dist, released Aug 25, 2006.
+This document describes version 0.20 of PAR::Dist, released Oct 11, 2006.
 
 =head1 SYNOPSIS
 
@@ -198,7 +198,8 @@ sub blib_to_par {
         close OLD_META;
         close META;
     }
-    elsif ((!$name or !$version) and open(MAKEFILE, "Makefile")) {
+    
+    if ((!$name or !$version) and open(MAKEFILE, "Makefile")) {
         while (<MAKEFILE>) {
             if (/^DISTNAME\s+=\s+(.*)$/) {
                 $name ||= $1;
@@ -209,6 +210,21 @@ sub blib_to_par {
         }
     }
 
+    if (not defined($name) or not defined($version)) {
+        # could not determine name or version. Error.
+        my $what;
+        if (not defined $name) {
+            $what = 'name';
+            $what .= ' and version' if not defined $version;
+        }
+        elsif (not defined $version) {
+            $what = 'version';
+        }
+        
+        carp("I was unable to determine the $what of the PAR distribution. Please create a Makefile or META.yml file from which we can infer the information or just specify the missing information as an option to blib_to_par.");
+        return();
+    }
+    
     $name =~ s/\s+$//;
     $version =~ s/\s+$//;
 
@@ -317,6 +333,14 @@ file is written to. (Necessary for uninstallation.)
 The C<packlist_read> parameter specifies a .packlist file to merge in if
 it exists.
 
+Finally, you may specify a C<custom_targets> parameter. Its value should be
+a reference to a hash of custom installation targets such as
+
+  custom_targets => { 'blib/my_data' => '/some/path/my_data' }
+
+You can use this to install the F<.par> archives contents to arbitrary
+locations.
+
 If only a single parameter is given, it is treated as the C<dist>
 parameter.
 
@@ -381,6 +405,8 @@ sub _install_or_uninstall {
     my $rv;
     if ($action eq 'install') {
         my $target = _installation_target( File::Spec->curdir, $name, \%args );
+        my $custom_targets = $args{custom_targets} || {};
+        $target->{$_} = $custom_targets->{$_} foreach keys %{$custom_targets};
         
         $rv = ExtUtils::Install::install($target, 1, 0, 0);
     }
@@ -428,7 +454,7 @@ sub _installation_target {
        read => $Config::Config{sitearchexp}."/auto/$name/.packlist",
        write => $Config::Config{installsitearch}."/auto/$name/.packlist",
        $sources{inst_lib}
-            => (directory_not_empty($sources{inst_archlib}))
+            => (_directory_not_empty($sources{inst_archlib}))
             ? $Config::Config{installsitearch}
             : $Config::Config{installsitelib},
        $sources{inst_archlib}   => $Config::Config{installsitearch},
@@ -460,6 +486,19 @@ sub _installation_target {
     return $target;
 }
 
+sub _directory_not_empty {
+    require File::Find;
+    my($dir) = @_;
+    my $files = 0;
+    File::Find::find(sub {
+	    return if $_ eq ".exists";
+        if (-f) {
+            $File::Find::prune++;
+            $files = 1;
+            }
+    }, $dir);
+    return $files;
+}
 
 =head2 sign_par
 
