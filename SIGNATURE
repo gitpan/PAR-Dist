@@ -14,20 +14,20 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 d0ad301b6118891f582cd4ca5bfa92831a7346a9 Changes
+SHA1 147aec77c8ceb07ab50f37dd77a209fe8177935a Changes
 SHA1 8ddff35436cebe6a14edb3645c7b8e99deef3c2a MANIFEST
-SHA1 a1fb995771683d0e1d9cb6cc56c4e56dee61c36d META.yml
+SHA1 efc14aae4bf662f6c00d48215e264ed6ee498804 META.yml
 SHA1 40ca03314151a4b51e870b6798af27698fbcac5f Makefile.PL
 SHA1 9dd7b57bae562cd465aa4d15125a472a0988f610 README
-SHA1 ceac99579ef3914de1936417282842c07d907a6a inc/Module/Install.pm
-SHA1 6c9471c92c28e247fb84f4ab7dc277f68b33ea95 inc/Module/Install/Base.pm
-SHA1 b2cb1026330e8c4f8533c79569498ab15f189d86 inc/Module/Install/Can.pm
-SHA1 78acbad45c4289c228ead2278fc213ddd66bcead inc/Module/Install/Fetch.pm
-SHA1 642e5b27f4cbbbe440e5dc05c639f5fb79875fe3 inc/Module/Install/Makefile.pm
-SHA1 80d024f3eccf1c825b02b5e59de236b0af7d4bfc inc/Module/Install/Metadata.pm
-SHA1 fe6780ea5cfd67c79140699fbd4f0fe262255d57 inc/Module/Install/Win32.pm
-SHA1 51d43bffcfd7ffdecb8c8e9f97f3896c31b2e1b2 inc/Module/Install/WriteAll.pm
-SHA1 7a8fb31359b09ac3058aafc0dbb18fe098c96dd8 lib/PAR/Dist.pm
+SHA1 78edb89a439463e44c33a72bbee84c54d0dc8aaf inc/Module/Install.pm
+SHA1 8ea4e37df83fd0c1c050be5c8da75545c3828d9b inc/Module/Install/Base.pm
+SHA1 1da6031583c32f0d1ec073b8376102fc51427dcc inc/Module/Install/Can.pm
+SHA1 b779375b90c16af2f31f38a1dd2b5df223c7f2fb inc/Module/Install/Fetch.pm
+SHA1 2054450e1e9c1dd8056362bf4a64ae70d5d71476 inc/Module/Install/Makefile.pm
+SHA1 5d6189b2cad15cf9932a28faafd55130c8247e83 inc/Module/Install/Metadata.pm
+SHA1 02af973fae2ac3531fa6b704574b2b8cb2a08148 inc/Module/Install/Win32.pm
+SHA1 3a2eab96e91cca8d99938cda7791759ae9d97b3a inc/Module/Install/WriteAll.pm
+SHA1 f889e762b443f3822bfd9d20f1e343c573e9583a lib/PAR/Dist.pm
 SHA1 3467e6bd4b5227f8e1e21f45832b279c2e8c5b7f t/00pod.t
 SHA1 ff599aecf703ad5bdecd16311ce6279e7ff1825b t/00podcover.t
 SHA1 b01d036a15ebcb6e5f1f0af32608f2fd541c8e0e t/01basic.t
@@ -35,7 +35,7 @@ SHA1 63f81c962d7b26c0e4ce9e6317ca71d7afadef94 t/02parsedistname.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.6 (GNU/Linux)
 
-iD8DBQFGNjoZZCuimE51gxcRAv1PAKC1ee5Yfnr/bbJGdJ2c/G0GCW+36wCfe2+3
-FKA6wPuxRNIVmC5cCrQbBUk=
-=wnvo
+iD8DBQFGfqTIZCuimE51gxcRAi/JAKC0twKUN4OtsxiNmSUxBvt6rGgnrQCgn+f3
+3r743yWz+NGZeJFmMnZawwk=
+=f0SA
 -----END PGP SIGNATURE-----
