@@ -1,21 +1,14 @@
---- 
-abstract: Create and manipulate PAR distributions
-author: Audrey Tang (autrijus@autrijus.org)
+# http://module-build.sourceforge.net/META-spec.html
+#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
+name:         PAR-Dist
+version:      0.24
+version_from: lib/PAR/Dist.pm
+installdirs:  site
+requires:
+    File::Find:                    0
+    File::Path:                    0
+    File::Spec:                    0
+    File::Temp:                    0
+
 distribution_type: module
-generated_by: Module::Install version 0.67
-license: perl
-meta-spec: 
-  url: http://module-build.sourceforge.net/META-spec-v1.3.html
-  version: 1.3
-name: PAR-Dist
-no_index: 
-  directory: 
-    - inc
-    - t
-requires: 
-  Cwd: 0
-  File::Find: 0
-  File::Path: 0
-  File::Spec: 0
-  File::Temp: 0
-version: 0.23
+generated_by: ExtUtils::MakeMaker version 6.30_01
