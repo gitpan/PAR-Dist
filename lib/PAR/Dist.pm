@@ -2,7 +2,7 @@ package PAR::Dist;
 require Exporter;
 use vars qw/$VERSION @ISA @EXPORT @EXPORT_OK/;
 
-$VERSION    = '0.24';
+$VERSION    = '0.25';
 @ISA	    = 'Exporter';
 @EXPORT	    = qw/
   blib_to_par
@@ -31,7 +31,7 @@ PAR::Dist - Create and manipulate PAR distributions
 
 =head1 VERSION
 
-This document describes version 0.24 of PAR::Dist, released Jul 20, 2007.
+This document describes version 0.25 of PAR::Dist, released Jul 29, 2007.
 
 =head1 SYNOPSIS
 
@@ -51,7 +51,7 @@ In programs:
 
     install_par("http://foo.com/DBI-1.37-MSWin32-5.8.0.par"); # works too
     install_par("http://foo.com/DBI-1.37"); # auto-appends archname + perlver
-    install_par("cpan://SMUELLER/PAR-0.91"); # uses CPAN author directory
+    install_par("cpan://SMUELLER/PAR-Packer-0.975"); # uses CPAN author directory
 
 =head1 DESCRIPTION
 
@@ -607,7 +607,7 @@ sub merge_par {
             {wanted =>sub {
                 my $file = $File::Find::name;
                 push @files, $file if -f $file;
-                push @dirs, $file if -d $file;
+                push @dirs, $file if -d _;
             }},
             $add_dir
         );
@@ -776,6 +776,12 @@ sub _unzip {
     my $path = $args{path} || File::Spec->curdir;
     return unless -f $dist;
 
+    # Try fast unzipping first
+    if (eval { require Archive::Unzip::Burst; 1 }) {
+        my $return = Archive::Unzip::Burst::unzip($dist, $path);
+        return if $return; # true return value == error (a la system call)
+    }
+    # Then slow unzipping
     if (eval { require Archive::Zip; 1 }) {
         my $zip = Archive::Zip->new;
         local %SIG;
@@ -783,9 +789,12 @@ sub _unzip {
         return unless $zip->read($dist) == Archive::Zip::AZ_OK()
                   and $zip->extractTree('', "$path/") == Archive::Zip::AZ_OK();
     }
+    # Then fall back to the system
     else {
         return if system(unzip => $dist, '-d', $path);
     }
+
+    return 1;
 }
 
 sub _zip {
@@ -802,15 +811,24 @@ sub _zip {
     }
 }
 
-sub _args {
-    unshift @_, (glob('*.par'))[0] unless @_;
-    @_ = (dist => @_) if @_ == 1;
-    my %args = @_;
 
+# This sub munges the arguments to most of the PAR::Dist functions
+# into a hash. On the way, it downloads PAR archives as necessary, etc.
+sub _args {
+    # default to the first .par in the CWD
+    if (not @_) {
+        @_ = (glob('*.par'))[0];
+    }
+
+    # single argument => it's a distribution file name or URL
+    @_ = (dist => @_) if @_ == 1;
+
+    my %args = @_;
     $args{name} ||= $args{dist};
+
     # If we are installing from an URL, we want to munge the
     # distribution name so that it is in form "Module-Name"
-    if ($args{name}) {
+    if (defined $args{name}) {
         $args{name} =~ s/^\w+:\/\///;
         my @elems = parse_dist_name($args{name});
         # @elems is name, version, arch, perlversion
@@ -822,17 +840,25 @@ sub _args {
             $args{name} =~ s/^([0-9A-Za-z_-]+)-\d+\..+$/$1/;
         }
     }
-    $args{dist} .= '-' . do {
-        require Config;
-        $args{suffix} || "$Config::Config{archname}-$Config::Config{version}.par"
-    } unless !$args{dist} or $args{dist} =~ /\.[a-zA-Z_][^.]*$/;
 
-    $args{dist} = _fetch(dist => $args{dist})
-      if ($args{dist} and $args{dist} =~ m!^\w+://!);
+    # append suffix if there is none
+    if ($args{dist} and not $args{dist} =~ /\.[a-zA-Z_][^.]*$/) {
+        require Config;
+        my $suffix = $args{suffix};
+        $suffix ||= "$Config::Config{archname}-$Config::Config{version}.par";
+        $args{dist} .= "-$suffix";
+    }
+
+    # download if it's an URL
+    if ($args{dist} and $args{dist} =~ m!^\w+://!) {
+        $args{dist} = _fetch(dist => $args{dist})
+    }
+
     return %args;
 }
 
 
+# Download PAR archive, but only if necessary (mirror!)
 my %escapes;
 sub _fetch {
     my %args = @_;
@@ -903,7 +929,9 @@ sub _unzip_to_tmpdir {
     require File::Temp;
 
     my $dist   = File::Spec->rel2abs($args{dist});
-    my $tmpdir = File::Temp::mkdtemp(File::Spec->catdir(File::Spec->tmpdir, "parXXXXX")) or die $!;
+    my $tmpdirname = File::Spec->catdir(File::Spec->tmpdir, "parXXXXX");
+    my $tmpdir = File::Temp::mkdtemp($tmpdirname)        
+      or die "Could not create temporary directory from template '$tmpdirname': $!";
     my $path = $tmpdir;
     $path = File::Spec->catdir($tmpdir, $args{subdir}) if defined $args{subdir};
     _unzip(dist => $dist, path => $path);
