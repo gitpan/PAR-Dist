@@ -1,14 +1,17 @@
-# http://module-build.sourceforge.net/META-spec.html
-#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
-name:         PAR-Dist
-version:      0.25
-version_from: lib/PAR/Dist.pm
-installdirs:  site
-requires:
+--- #YAML:1.0
+name:                PAR-Dist
+version:             0.26
+abstract:            Create and manipulate PAR distributions
+license:             ~
+author:              
+    - Audrey Tang <cpan@audreyt.org>
+generated_by:        ExtUtils::MakeMaker version 6.42
+distribution_type:   module
+requires:     
     File::Find:                    0
     File::Path:                    0
     File::Spec:                    0
     File::Temp:                    0
-
-distribution_type: module
-generated_by: ExtUtils::MakeMaker version 6.30_01
+meta-spec:
+    url:     http://module-build.sourceforge.net/META-spec-v1.3.html
+    version: 1.3
