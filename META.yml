@@ -1,11 +1,11 @@
 --- #YAML:1.0
 name:                PAR-Dist
-version:             0.31
+version:             0.32
 abstract:            Create and manipulate PAR distributions
 license:             ~
 author:              
     - Audrey Tang <cpan@audreyt.org>
-generated_by:        ExtUtils::MakeMaker version 6.42
+generated_by:        ExtUtils::MakeMaker version 6.44
 distribution_type:   module
 requires:     
     File::Find:                    0
