@@ -4,22 +4,21 @@ use strict;
 use Test;
 use vars '$loaded';
 
+
 BEGIN { $loaded = eval { require PAR::Dist; 1 } };
 BEGIN {
   my $tests = 25;
   if ($loaded) {  
     # skip these tests without YAML loader or without (A::Zip or zipo/unzip)
     $PAR::Dist::DEBUG = 1;
-    my ($y_func) = PAR::Dist::_get_yaml_functions();
+    my $tools = PAR::Dist::_check_tools();
     $PAR::Dist::DEBUG = 0;
-    if (not $y_func or not exists $y_func->{DumpFile}) {
+    if (not defined $tools->{DumpFile}) {
       plan tests => 1;
       skip("Skip because no YAML loader/dumper could be found");
       exit();
     }
-    elsif (not eval {use Archive::Zip; 1;}
-           and (not system("zip") or not system("unzip")))
-    {
+    elsif (not defined $tools->{zip}) {
       plan tests => 1;
       skip("Skip because neither Archive::Zip nor zip/unzip could be found");
       exit();
