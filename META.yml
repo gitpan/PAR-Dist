@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                PAR-Dist
-version:             0.37
+version:             0.38
 abstract:            Create and manipulate PAR distributions
 license:             ~
 author:              
