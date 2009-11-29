@@ -4,7 +4,7 @@ use strict;
 require Exporter;
 use vars qw/$VERSION @ISA @EXPORT @EXPORT_OK $DEBUG/;
 
-$VERSION    = '0.46'; # Change version in POD, too!
+$VERSION    = '0.47'; # Change version in POD, too!
 @ISA	    = 'Exporter';
 @EXPORT	    = qw/
   blib_to_par
@@ -34,7 +34,7 @@ PAR::Dist - Create and manipulate PAR distributions
 
 =head1 VERSION
 
-This document describes version 0.46 of PAR::Dist, released July 31, 2009.
+This document describes version 0.47 of PAR::Dist, released November 29, 2009.
 
 =head1 SYNOPSIS
 
@@ -372,7 +372,7 @@ file is written to. (Necessary for uninstallation.)
 The C<packlist_read> parameter specifies a .packlist file to merge in if
 it exists. By setting any of the above installation targets to C<undef>,
 you can remove that target altogether. For example, passing
-C<inst_man1dir => undef, inst_man3dir => undef> means that the contained
+C<< inst_man1dir => undef, inst_man3dir => undef >> means that the contained
 manual pages won't be installed. This is not available for the packlists.
 
 Again, the defaults will be the normal I<site> paths from C<%Config>.
@@ -1405,7 +1405,7 @@ L<PAR>, L<ExtUtils::Install>, L<Module::Signature>, L<LWP::Simple>
 
 Audrey Tang E<lt>cpan@audreyt.orgE<gt> 2003-2007
 
-Steffen Mueller E<lt>smueller@cpan.orgE<gt> 2005-2008
+Steffen Mueller E<lt>smueller@cpan.orgE<gt> 2005-2009
 
 PAR has a mailing list, E<lt>par@perl.orgE<gt>, that you can write to;
 send an empty mail to E<lt>par-subscribe@perl.orgE<gt> to join the list
@@ -1415,7 +1415,7 @@ Please send bug reports to E<lt>bug-par@rt.cpan.orgE<gt>.
 
 =head1 COPYRIGHT
 
-Copyright 2003-2008 by Audrey Tang E<lt>autrijus@autrijus.orgE<gt>.
+Copyright 2003-2009 by Audrey Tang E<lt>autrijus@autrijus.orgE<gt>.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
