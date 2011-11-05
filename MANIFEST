@@ -10,4 +10,5 @@ t/02parsedistname.t
 t/03merge_meta.t
 t/data/dist1.par
 t/data/dist2.par
-META.yml                                 Module meta-data (added by MakeMaker)
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)
